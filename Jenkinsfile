@@ -36,7 +36,7 @@ pipeline {
 			steps {
     			withSonarQubeEnv(credentialsId: '021ef3b2-af35-45b6-9eeb-adaa10aa3971', 
 								 installationName: 'My SonarQube Server') {
-					sh 'mvn http://devtest-sonar1.fyre.ibm.com:9000:sonar-maven-plugin:3.7.0.1746:sonar' 
+					sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar' 
 				}
 			}
 		}
