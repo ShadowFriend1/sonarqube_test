@@ -5,7 +5,9 @@ pipeline {
             args '-v /root/.m2:/root/.m2 -u root:root'
         }
     }
-    @Library('common-jk-build')
+    libraries {
+	lib('common-jk-build')
+    }
     stages {
 	    stage('Check Versions') {
 	        steps {
