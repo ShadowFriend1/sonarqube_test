@@ -1,12 +1,12 @@
+libraries {
+    lib('common-jk-build')
+}
 pipeline {
     agent {
         docker {
             image 'maven:3-alpine' 
             args '-v /root/.m2:/root/.m2 -u root:root'
         }
-    }
-    libraries {
-	lib('common-jk-build')
     }
     stages {
 	    stage('Check Versions') {
