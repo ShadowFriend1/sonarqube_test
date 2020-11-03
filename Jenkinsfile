@@ -35,11 +35,11 @@ pipeline {
                 }
             }
         }
-	stage() {
-	    steps {
-		codeScanWithMetadata(["src"])
+	    stage() {
+	        steps {
+		        codeScanWithMetadata(["src"])
+	        }
 	    }
-	}
         stage('Deliver') {
             steps {
 		        sh '''
