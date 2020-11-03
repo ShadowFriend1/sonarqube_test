@@ -1,3 +1,5 @@
+@Library('common-jk-build')
+
 pipeline {
     agent {
         docker {
