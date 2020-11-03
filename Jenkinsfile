@@ -35,7 +35,7 @@ pipeline {
                 }
             }
         }
-	    stage() {
+	    stage('Code Scan') {
 	        steps {
 		        codeScanWithMetadata(["src"])
 	        }
