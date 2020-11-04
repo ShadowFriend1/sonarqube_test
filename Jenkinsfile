@@ -14,44 +14,13 @@ pipeline {
 	        }
 	    }
 		stage('SonarQube analysis') {
+			environment {
+        		scannerHome = tool 'SonarQubeScanner'
+    		}    
 			steps {
-    			withSonarQubeEnv(installationName: 'My SonarQube Server') {
-					sh 'mvn sonar:sonar'
-				}
-			}
+        		withSonarQubeEnv('sonarqube') {
+            		sh "${scannerHome}/bin/sonar-scanner"
+        	}
 		}
-		stage("Quality Gate") {
-            steps {
-  			    timeout(time: 1, unit: 'HOURS') { 
-    			    waitForQualityGate abortPipeline: true
-                }
-            }
-  		}
-        stage('Build') {
-            steps {
-		        sh '''
-		        mvn -B -DskipTests clean package
-		        '''
-            }
-        }
-        stage('Test') {
-            steps {
-		        sh '''
-		        mvn test
-		        '''
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-		}
-        stage('Deliver') {
-            steps {
-		        sh '''
-		        ./deliver.sh
-		        '''
-            }
-        }
     }
 }
